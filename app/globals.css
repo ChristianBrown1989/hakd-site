@@ -528,6 +528,14 @@ nav {
   font-size: 0.65rem;
   color: var(--t3);
 }
+.newsletter-success {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-align: center;
+  padding: 1rem;
+}
+.newsletter-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
 /* ─── EMM BANNER ─── */
 .emm-banner {

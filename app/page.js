@@ -1,5 +1,6 @@
 import { supabase } from '../lib/supabase';
 import Link from 'next/link';
+import NewsletterForm from './components/NewsletterForm';
 
 export const revalidate = 3600;
 
@@ -199,14 +200,7 @@ export default async function HomePage() {
           <p className="newsletter-sub">
             Every Monday and Thursday — one evidence-based protocol, one actionable insight. No fluff. Built for professionals who are already doing the work and want the edge.
           </p>
-          <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="email"
-              className="newsletter-input"
-              placeholder="your@email.com"
-            />
-            <button type="submit" className="newsletter-btn">Subscribe</button>
-          </form>
+          <NewsletterForm />
           <p className="newsletter-privacy">No spam. Unsubscribe any time.</p>
         </div>
       </section>
