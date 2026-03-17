@@ -537,6 +537,209 @@ nav {
 }
 .newsletter-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
+/* ─── CLIENT PORTAL ─── */
+.client-portal {
+  min-height: 100vh;
+  background: var(--bg);
+}
+.cp-header {
+  background: var(--surface);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0.85rem 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.cp-header-inner {
+  max-width: 560px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cp-brand { display: flex; align-items: center; gap: 0.5rem; }
+.cp-brand-badge {
+  background: var(--gold);
+  color: #0a0a0a;
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+}
+.cp-brand-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(242,242,242,0.5);
+  letter-spacing: 0.04em;
+}
+.cp-client-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.cp-body {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 4rem;
+}
+.cp-identity-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-left-width: 3px;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+.cp-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 0.3rem;
+}
+.cp-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 0.55rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(242,242,242,0.4);
+  cursor: pointer;
+  border-radius: 7px;
+  font-family: inherit;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.cp-tab.active {
+  background: rgba(255,255,255,0.07);
+  color: var(--text);
+}
+.cp-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+.cp-card-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(242,242,242,0.3);
+  margin-bottom: 0.85rem;
+}
+.cp-field-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(242,242,242,0.65);
+  margin-bottom: 0.6rem;
+}
+.cp-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.1);
+  outline: none;
+  margin-bottom: 0.5rem;
+}
+.cp-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--gold);
+  cursor: pointer;
+}
+.cp-choice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  width: 100%;
+  background: var(--s2);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.15s;
+}
+.cp-textarea {
+  width: 100%;
+  background: var(--s2);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+  font-size: 0.82rem;
+  color: var(--text);
+  font-family: inherit;
+  outline: none;
+  resize: vertical;
+  line-height: 1.55;
+}
+.cp-textarea::placeholder { color: rgba(242,242,242,0.25); }
+.cp-btn-primary {
+  width: 100%;
+  background: var(--gold);
+  color: #0a0a0a;
+  border: none;
+  border-radius: 9px;
+  padding: 0.9rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+.cp-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.cp-btn-primary:hover:not(:disabled) { opacity: 0.88; }
+.cp-btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(242,242,242,0.5);
+  border-radius: 9px;
+  padding: 0.9rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+.cp-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem 1.25rem;
+}
+
+/* ─── COACH PORTAL ─── */
+.coach-portal { min-height: 100vh; background: var(--bg); }
+.coach-header {
+  background: var(--surface);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0.85rem 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.coach-header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.coach-body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
 /* ─── EMM BANNER ─── */
 .emm-banner {
   background: linear-gradient(135deg, var(--s2) 0%, #16130a 100%);
