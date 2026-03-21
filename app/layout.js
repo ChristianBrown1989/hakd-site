@@ -49,6 +49,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <meta name="msvalidate.01" content="62B70970004A4C96E0BD783C6676C3CF" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaWebSite }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaPerson }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
