@@ -7,14 +7,24 @@ export const revalidate = 3600;
 export async function generateMetadata({ params }) {
   const { data } = await supabase
     .from('articles')
-    .select('title, meta_description')
+    .select('title, meta_description, published_at, slug')
     .eq('slug', params.slug)
     .single();
   if (!data) return { title: 'HAKD' };
   return {
     title: `${data.title} — HAKD`,
     description: data.meta_description,
-    openGraph: { title: data.title, description: data.meta_description },
+    alternates: { canonical: `https://hakd.co/articles/${data.slug}` },
+    openGraph: {
+      title: data.title,
+      description: data.meta_description,
+      type: 'article',
+      url: `https://hakd.co/articles/${data.slug}`,
+      siteName: 'HAKD',
+      publishedTime: data.published_at,
+      authors: ['Christian Brown'],
+    },
+    twitter: { card: 'summary_large_image', title: data.title, description: data.meta_description },
   };
 }
 
@@ -44,8 +54,42 @@ export default async function ArticlePage({ params }) {
 
   const related = await getRelated(params.slug);
 
+  // Article JSON-LD — what AI search engines use to cite and summarize this content
+  const wordCount = article.content ? article.content.replace(/<[^>]+>/g, '').split(/\s+/).length : 800;
+  const readMins = Math.max(4, Math.round(wordCount / 200));
+
+  const articleSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.meta_description || '',
+    url: `https://hakd.co/articles/${article.slug}`,
+    datePublished: article.published_at,
+    dateModified: article.updated_at || article.published_at,
+    author: { '@type': 'Person', name: 'Christian Brown', url: 'https://hakd.co' },
+    publisher: { '@type': 'Organization', name: 'HAKD', url: 'https://hakd.co' },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://hakd.co/articles/${article.slug}` },
+    wordCount,
+    timeRequired: `PT${readMins}M`,
+    inLanguage: 'en-US',
+    about: { '@type': 'Thing', name: 'Performance Optimization' },
+    keywords: 'biohacking, HRV, nervous system, recovery, performance, longevity',
+  });
+
+  const breadcrumbSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://hakd.co' },
+      { '@type': 'ListItem', position: 2, name: 'Articles', item: 'https://hakd.co/articles' },
+      { '@type': 'ListItem', position: 3, name: article.title, item: `https://hakd.co/articles/${article.slug}` },
+    ],
+  });
+
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: articleSchema }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema }} />
       <div className="article-wrap">
         {/* MAIN CONTENT */}
         <article className="article-main">
@@ -56,7 +100,7 @@ export default async function ArticlePage({ params }) {
             <div dangerouslySetInnerHTML={{ __html: `<h1>${article.title}</h1>` }} />
             <div className="article-header-meta">
               <span>📅 {formatDate(article.published_at)}</span>
-              <span>⏱ 6 min read</span>
+              <span>⏱ {readMins} min read</span>
               <span>✍️ Christian Brown</span>
             </div>
           </header>
