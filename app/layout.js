@@ -5,6 +5,7 @@ export const metadata = {
   description: 'Evidence-based protocols for high-performing professionals. HRV optimization, adaptive training, recovery architecture, and nervous system science — built for people who run at full capacity.',
   metadataBase: new URL('https://hakd.app'),
   alternates: { canonical: 'https://hakd.app' },
+  verification: { google: 'dd73f79cadf7fe77' },
   openGraph: {
     title: 'HAKD — Performance Intelligence',
     description: 'Evidence-based performance optimization for high achievers.',
