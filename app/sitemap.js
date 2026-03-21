@@ -1,6 +1,6 @@
 import { supabase } from '../lib/supabase';
 
-const BASE_URL = 'https://hakd.co';
+const BASE_URL = 'https://hakd.app';
 
 const STATIC_ROUTES = [
   { url: BASE_URL, priority: 1.0, changefreq: 'daily' },

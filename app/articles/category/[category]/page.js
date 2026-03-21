@@ -66,8 +66,8 @@ export async function generateMetadata({ params }) {
   return {
     title: cat.title,
     description: cat.description,
-    alternates: { canonical: `https://hakd.co/articles/category/${params.category}` },
-    openGraph: { title: cat.title, description: cat.description, url: `https://hakd.co/articles/category/${params.category}`, siteName: 'HAKD' },
+    alternates: { canonical: `https://hakd.app/articles/category/${params.category}` },
+    openGraph: { title: cat.title, description: cat.description, url: `https://hakd.app/articles/category/${params.category}`, siteName: 'HAKD' },
   };
 }
 
@@ -88,13 +88,13 @@ export default async function CategoryPage({ params }) {
     '@type': 'CollectionPage',
     name: cat.name,
     description: cat.description,
-    url: `https://hakd.co/articles/category/${params.category}`,
+    url: `https://hakd.app/articles/category/${params.category}`,
     about: { '@type': 'Thing', name: cat.entity },
-    publisher: { '@type': 'Organization', name: 'HAKD', url: 'https://hakd.co' },
+    publisher: { '@type': 'Organization', name: 'HAKD', url: 'https://hakd.app' },
     hasPart: (articles || []).map(a => ({
       '@type': 'Article',
       headline: a.title,
-      url: `https://hakd.co/articles/${a.slug}`,
+      url: `https://hakd.app/articles/${a.slug}`,
       datePublished: a.published_at,
     })),
   });
@@ -103,9 +103,9 @@ export default async function CategoryPage({ params }) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://hakd.co' },
-      { '@type': 'ListItem', position: 2, name: 'Articles', item: 'https://hakd.co/articles' },
-      { '@type': 'ListItem', position: 3, name: cat.name, item: `https://hakd.co/articles/category/${params.category}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://hakd.app' },
+      { '@type': 'ListItem', position: 2, name: 'Articles', item: 'https://hakd.app/articles' },
+      { '@type': 'ListItem', position: 3, name: cat.name, item: `https://hakd.app/articles/category/${params.category}` },
     ],
   });
 

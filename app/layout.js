@@ -3,13 +3,13 @@ import './globals.css';
 export const metadata = {
   title: 'HAKD — Performance Intelligence for High Achievers',
   description: 'Evidence-based protocols for high-performing professionals. HRV optimization, adaptive training, recovery architecture, and nervous system science — built for people who run at full capacity.',
-  metadataBase: new URL('https://hakd.co'),
-  alternates: { canonical: 'https://hakd.co' },
+  metadataBase: new URL('https://hakd.app'),
+  alternates: { canonical: 'https://hakd.app' },
   openGraph: {
     title: 'HAKD — Performance Intelligence',
     description: 'Evidence-based performance optimization for high achievers.',
     type: 'website',
-    url: 'https://hakd.co',
+    url: 'https://hakd.app',
     siteName: 'HAKD',
   },
   twitter: { card: 'summary_large_image', title: 'HAKD — Performance Intelligence', description: 'Evidence-based performance optimization for high achievers.' },
@@ -21,11 +21,11 @@ const schemaWebSite = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'HAKD',
-  url: 'https://hakd.co',
+  url: 'https://hakd.app',
   description: 'Evidence-based performance intelligence for high-achieving professionals — HRV, recovery, nervous system science, adaptive training, and longevity protocols.',
   potentialAction: {
     '@type': 'SearchAction',
-    target: { '@type': 'EntryPoint', urlTemplate: 'https://hakd.co/articles?q={search_term_string}' },
+    target: { '@type': 'EntryPoint', urlTemplate: 'https://hakd.app/articles?q={search_term_string}' },
     'query-input': 'required name=search_term_string',
   },
 });
@@ -34,7 +34,7 @@ const schemaPerson = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Christian Brown',
-  url: 'https://hakd.co',
+  url: 'https://hakd.app',
   jobTitle: 'Performance Coach',
   description: 'Performance coach specializing in nervous system optimization, HRV-based training, and adaptive programming for high-achieving professionals.',
   knowsAbout: [

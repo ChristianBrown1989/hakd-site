@@ -13,7 +13,7 @@ export default function robots() {
       { userAgent: 'Google-Extended', allow: '/' },
       { userAgent: 'Amazonbot', allow: '/' },
     ],
-    sitemap: 'https://hakd.co/sitemap.xml',
-    host: 'https://hakd.co',
+    sitemap: 'https://hakd.app/sitemap.xml',
+    host: 'https://hakd.app',
   };
 }
