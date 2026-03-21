@@ -52,6 +52,7 @@ export default function RootLayout({ children }) {
         <meta name="msvalidate.01" content="62B70970004A4C96E0BD783C6676C3CF" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaWebSite }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaPerson }} />
+        <link rel="alternate" type="application/rss+xml" title="HAKD Performance Intelligence" href="https://hakd.app/feed.xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
       </head>
@@ -71,6 +72,7 @@ export default function RootLayout({ children }) {
             <div className="nav-center">
               <a href="/articles">Articles</a>
               <a href="/directory">Directory</a>
+              <a href="/about">About</a>
               <a href="#newsletter">Newsletter</a>
               <a href="https://deluxe-moxie-d4016f.netlify.app" target="_blank" rel="noopener">Assessment</a>
             </div>
@@ -103,6 +105,8 @@ export default function RootLayout({ children }) {
               <a href="/directory">Directory</a>
               <a href="https://deluxe-moxie-d4016f.netlify.app" target="_blank" rel="noopener">EMM Assessment</a>
               <a href="#newsletter">Newsletter</a>
+              <a href="/about">About Christian</a>
+              <a href="/feed.xml">RSS Feed</a>
             </div>
             <div className="footer-col">
               <div className="footer-col-title">EMM Coaching</div>

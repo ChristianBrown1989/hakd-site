@@ -129,10 +129,10 @@ export default async function HomePage() {
       <div className="cat-nav">
         <div className="cat-nav-inner">
           {CATEGORIES.map((cat) => (
-            <div key={cat.key} className="cat-nav-item">
+            <Link href={`/articles/category/${cat.key}`} key={cat.key} className="cat-nav-item" style={{ textDecoration: 'none' }}>
               <span className="cat-nav-dot" style={{ background: cat.color }} />
               {cat.name}
-            </div>
+            </Link>
           ))}
         </div>
       </div>

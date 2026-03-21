@@ -1,3 +1,15 @@
+export const metadata = {
+  title: 'Human Optimization Directory — HAKD',
+  description: 'A curated, vetted resource hub for high performers. Coaches, recovery tools, wearables, nutrition protocols, and longevity research — all reviewed for evidence quality.',
+  alternates: { canonical: 'https://hakd.app/directory' },
+  openGraph: {
+    title: 'Human Optimization Directory — HAKD',
+    description: 'Curated performance resources reviewed for evidence quality and real-world application.',
+    url: 'https://hakd.app/directory',
+    siteName: 'HAKD',
+  },
+};
+
 export default function DirectoryPage() {
   const categories = [
     { name: 'Coaches & Practitioners', desc: 'Vetted performance coaches, sports medicine, and optimization specialists.', count: 'Coming soon' },
