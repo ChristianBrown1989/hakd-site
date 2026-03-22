@@ -1,5 +1,6 @@
 import { supabase } from '../../lib/supabase';
 import Link from 'next/link';
+import DirectorySearch from '../components/DirectorySearch';
 
 export const revalidate = 3600;
 
@@ -114,24 +115,12 @@ export default async function DirectoryPage() {
         </div>
       </section>
 
-      {/* CATEGORY FILTER NAV */}
-      <div style={{ padding: '0 1.5rem 2rem', maxWidth: '1100px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-        {CATEGORIES.map(cat => (
-          <Link key={cat.key} href={`/directory/category/${cat.key}`} style={{
-            padding: '0.4rem 0.9rem', borderRadius: '999px',
-            border: '1px solid var(--border)', fontSize: '0.75rem', fontWeight: 600,
-            color: cat.color, background: 'var(--surface)', textDecoration: 'none',
-            display: 'flex', alignItems: 'center', gap: '0.35rem',
-          }}>
-            <span>{cat.icon}</span> {cat.label}
-            {byCategory[cat.key]?.length > 0 && (
-              <span style={{ color: 'var(--t3)', fontWeight: 400 }}>({byCategory[cat.key].length})</span>
-            )}
-          </Link>
-        ))}
+      {/* SEARCH + FILTER */}
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem 4rem' }}>
+        <DirectorySearch listings={all} />
       </div>
 
-      {/* LISTINGS BY CATEGORY */}
+      {/* LISTINGS BY CATEGORY — below search */}
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1.5rem 4rem' }}>
         {totalListings === 0 ? (
           <div className="empty">

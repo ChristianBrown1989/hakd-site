@@ -2,6 +2,7 @@ import { supabase } from '../../../lib/supabase';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { marked } from 'marked';
+import ArticleNewsletterCTA from '../../components/ArticleNewsletterCTA';
 
 // Configure marked for clean output
 marked.setOptions({ breaks: true, gfm: true });
@@ -112,10 +113,21 @@ export default async function ArticlePage({ params }) {
             </div>
           </header>
 
-          <div
-            className="article-content"
-            dangerouslySetInnerHTML={{ __html: marked(article.content || '') }}
-          />
+          {(() => {
+            const html = marked(article.content || '');
+            // Split after ~3rd paragraph for mid-article CTA
+            const splitPoint = html.indexOf('</p>', html.indexOf('</p>', html.indexOf('</p>') + 1) + 1) + 4;
+            if (splitPoint > 4) {
+              return (
+                <>
+                  <div className="article-content" dangerouslySetInnerHTML={{ __html: html.slice(0, splitPoint) }} />
+                  <ArticleNewsletterCTA source={`article-${article.slug}`} />
+                  <div className="article-content" dangerouslySetInnerHTML={{ __html: html.slice(splitPoint) }} />
+                </>
+              );
+            }
+            return <div className="article-content" dangerouslySetInnerHTML={{ __html: html }} />;
+          })()}
 
           {/* FAQ SECTION — visible to users, also in JSON-LD for AI/search */}
           {article.faq_schema && (() => {

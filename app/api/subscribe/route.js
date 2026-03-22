@@ -1,6 +1,6 @@
 export async function POST(request) {
   try {
-    const { email } = await request.json();
+    const { email, source } = await request.json();
     if (!email || !email.includes('@')) {
       return Response.json({ error: 'Invalid email' }, { status: 400 });
     }
@@ -13,6 +13,8 @@ export async function POST(request) {
         body: JSON.stringify({
           api_key: 'unwsbthP07XOrlhfGdfrkg',
           email,
+          tags: source ? [source] : [],
+          fields: { source: source || 'direct' },
         }),
       }
     );
