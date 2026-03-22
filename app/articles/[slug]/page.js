@@ -1,6 +1,10 @@
 import { supabase } from '../../../lib/supabase';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { marked } from 'marked';
+
+// Configure marked for clean output
+marked.setOptions({ breaks: true, gfm: true });
 
 export const revalidate = 3600;
 
@@ -107,7 +111,7 @@ export default async function ArticlePage({ params }) {
 
           <div
             className="article-content"
-            dangerouslySetInnerHTML={{ __html: article.content }}
+            dangerouslySetInnerHTML={{ __html: marked(article.content || '') }}
           />
 
           {/* RELATED ARTICLES */}

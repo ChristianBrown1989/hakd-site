@@ -1079,6 +1079,30 @@ nav {
   vertical-align: top;
 }
 .article-content tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.article-content code {
+  background: var(--s2);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.85em;
+  color: var(--gold-l);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+.article-content pre {
+  background: var(--s2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.75rem 0;
+}
+.article-content pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.875rem;
+  color: var(--t2);
+}
 
 /* ─── SIDEBAR ─── */
 .article-sidebar {
