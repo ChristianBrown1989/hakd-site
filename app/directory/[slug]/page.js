@@ -1,6 +1,7 @@
 import { supabase } from '../../../lib/supabase';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import LeadCaptureForm from '../../components/LeadCaptureForm';
 
 export const revalidate = 3600;
 
@@ -236,6 +237,9 @@ export default async function ListingPage({ params }) {
                 </div>
               </div>
             )}
+
+            {/* LEAD CAPTURE */}
+            <LeadCaptureForm listingSlug={listing.slug} listingName={listing.name} />
 
             {/* CLAIM LISTING */}
             {!listing.claimed && (

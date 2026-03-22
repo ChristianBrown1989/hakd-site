@@ -75,12 +75,24 @@ export default async function CategoryPage({ params }) {
   const cat = CATEGORIES[params.category];
   if (!cat) notFound();
 
-  const { data: articles } = await supabase
+  // Primary: filter by category column (set by content pipeline)
+  // Fallback: keyword match in content for older articles without category tag
+  let { data: articles } = await supabase
     .from('articles')
     .select('title, slug, meta_description, published_at')
-    .ilike('content', `%${cat.keyword}%`)
+    .eq('category', params.category)
     .order('published_at', { ascending: false })
     .limit(20);
+
+  if (!articles || articles.length === 0) {
+    const { data: fallback } = await supabase
+      .from('articles')
+      .select('title, slug, meta_description, published_at')
+      .ilike('content', `%${cat.keyword}%`)
+      .order('published_at', { ascending: false })
+      .limit(20);
+    articles = fallback;
+  }
 
   // JSON-LD: CollectionPage schema — signals topic authority to AI crawlers
   const schema = JSON.stringify({
