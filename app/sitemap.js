@@ -47,10 +47,22 @@ export default async function sitemap() {
     changeFrequency: 'weekly',
   }));
 
+  const cityRoutes = [
+    'austin', 'new-york', 'los-angeles', 'miami', 'denver',
+    'san-francisco', 'chicago', 'seattle', 'boston', 'dallas',
+    'phoenix', 'nashville', 'san-diego', 'atlanta', 'portland',
+    'minneapolis', 'charlotte', 'washington-dc',
+  ].map(slug => ({
+    url: `${BASE_URL}/directory/city/${slug}`,
+    priority: 0.75,
+    changeFrequency: 'weekly',
+  }));
+
   return [
     ...STATIC_ROUTES.map(r => ({ url: r.url, priority: r.priority, changeFrequency: r.changefreq })),
     ...CATEGORY_ROUTES.map(r => ({ url: r.url, priority: r.priority, changeFrequency: r.changefreq })),
     ...directoryCategoryRoutes,
+    ...cityRoutes,
     ...articleRoutes,
     ...listingRoutes,
   ];

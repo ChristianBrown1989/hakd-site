@@ -12,17 +12,11 @@ export default function NewsletterForm() {
     setStatus('loading');
 
     try {
-      const res = await fetch(
-        `https://api.convertkit.com/v3/forms/9216083/subscribe`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            api_key: 'unwsbthP07XOrlhfGdfrkg',
-            email,
-          }),
-        }
-      );
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
       if (res.ok) {
         setStatus('success');
         setEmail('');
