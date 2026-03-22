@@ -66,6 +66,14 @@ export default async function ListingPage({ params }) {
     .order('evidence_rating', { ascending: false })
     .limit(3);
 
+  // Get related articles — same category, up to 3
+  const { data: relatedArticles } = await supabase
+    .from('articles')
+    .select('title, slug, meta_description, published_at')
+    .eq('category', listing.category)
+    .order('published_at', { ascending: false })
+    .limit(3);
+
   let tags = [];
   try { tags = JSON.parse(listing.specialty_tags || '[]'); } catch {}
 
@@ -271,6 +279,34 @@ export default async function ListingPage({ params }) {
                     <div>
                       <div style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)' }}>{r.name}</div>
                       {r.description && <div style={{ fontSize: '0.72rem', color: 'var(--t3)', marginTop: '0.2rem' }}>{r.description.slice(0, 80)}...</div>}
+                    </div>
+                    <span style={{ color: 'var(--gold)', opacity: 0.7, flexShrink: 0 }}>→</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* RELATED ARTICLES */}
+        {relatedArticles && relatedArticles.length > 0 && (
+          <div style={{ marginTop: '2.5rem', paddingTop: '2.5rem', borderTop: '1px solid var(--border)' }}>
+            <div style={{ fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--t3)', marginBottom: '1.25rem' }}>
+              Related Intelligence
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {relatedArticles.map(a => (
+                <Link href={`/articles/${a.slug}`} key={a.slug}>
+                  <div style={{
+                    background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '10px',
+                    padding: '1rem 1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem',
+                    transition: 'border-color 0.15s',
+                  }}>
+                    <div>
+                      <div style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text)', lineHeight: 1.4 }}>{a.title}</div>
+                      {a.meta_description && (
+                        <div style={{ fontSize: '0.72rem', color: 'var(--t3)', marginTop: '0.2rem' }}>{a.meta_description.slice(0, 90)}...</div>
+                      )}
                     </div>
                     <span style={{ color: 'var(--gold)', opacity: 0.7, flexShrink: 0 }}>→</span>
                   </div>
