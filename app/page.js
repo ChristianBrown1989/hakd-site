@@ -23,6 +23,13 @@ async function getArticles() {
   return data || [];
 }
 
+async function getDirectoryStats() {
+  const { count: listingCount } = await supabase
+    .from('hakd_listings')
+    .select('*', { count: 'exact', head: true });
+  return { listingCount: listingCount || 0 };
+}
+
 function formatDate(iso) {
   if (!iso) return '';
   return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
@@ -41,7 +48,7 @@ function getCategoryName(index) {
 }
 
 export default async function HomePage() {
-  const articles = await getArticles();
+  const [articles, { listingCount }] = await Promise.all([getArticles(), getDirectoryStats()]);
   const featured = articles[0];
   const rest = articles.slice(1);
 
@@ -248,6 +255,9 @@ export default async function HomePage() {
               <div className="directory-title">The Human Optimization Directory</div>
               <div className="directory-sub">
                 A curated, vetted resource hub. Every listing reviewed for evidence quality and real-world application.
+              </div>
+              <div style={{ fontSize: '0.72rem', color: 'var(--t3)', marginTop: '0.5rem' }}>
+                {listingCount} evidence-rated listings across 7 categories
               </div>
             </div>
             <a href="/directory" className="btn-primary" style={{ alignSelf: 'flex-start', whiteSpace: 'nowrap' }}>

@@ -117,6 +117,34 @@ export default async function ArticlePage({ params }) {
             dangerouslySetInnerHTML={{ __html: marked(article.content || '') }}
           />
 
+          {/* FAQ SECTION — visible to users, also in JSON-LD for AI/search */}
+          {article.faq_schema && (() => {
+            try {
+              const faq = JSON.parse(article.faq_schema);
+              const items = faq?.mainEntity || [];
+              if (!items.length) return null;
+              return (
+                <div style={{ marginTop: '3rem', paddingTop: '2.5rem', borderTop: '1px solid var(--border)' }}>
+                  <div style={{ fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--t3)', marginBottom: '1.5rem' }}>
+                    Frequently Asked
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                    {items.map((item, i) => (
+                      <div key={i} style={{ borderLeft: '2px solid var(--border2)', paddingLeft: '1.1rem' }}>
+                        <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text)', marginBottom: '0.4rem', lineHeight: 1.4 }}>
+                          {item.name}
+                        </div>
+                        <div style={{ fontSize: '0.82rem', color: 'var(--t2)', lineHeight: 1.7 }}>
+                          {item.acceptedAnswer?.text}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            } catch { return null; }
+          })()}
+
           {/* RELATED ARTICLES */}
           {related.length > 0 && (
             <div style={{ marginTop: '3.5rem', paddingTop: '2.5rem', borderTop: '1px solid var(--border)' }}>
