@@ -2,6 +2,7 @@ import { supabase } from '../../../lib/supabase';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import LeadCaptureForm from '../../components/LeadCaptureForm';
+import ClaimListingButton from '../../components/ClaimListingButton';
 
 export const revalidate = 3600;
 
@@ -251,13 +252,18 @@ export default async function ListingPage({ params }) {
 
             {/* CLAIM LISTING */}
             {!listing.claimed && (
-              <div style={{ background: 'var(--s2)', border: '1px solid var(--border)', borderRadius: '12px', padding: '1rem' }}>
-                <div style={{ fontSize: '0.68rem', color: 'var(--t3)', lineHeight: 1.6 }}>
-                  Is this your listing? Claim it to add booking links, update your profile, and access lead reports.
+              <ClaimListingButton
+                listingSlug={listing.slug}
+                listingName={listing.name}
+              />
+            )}
+
+            {listing.claimed && (
+              <div style={{ background: 'var(--s2)', border: '1px solid rgba(74,222,128,0.2)', borderRadius: '12px', padding: '1rem' }}>
+                <div style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--green)', marginBottom: '0.35rem' }}>✓ Verified Listing</div>
+                <div style={{ fontSize: '0.72rem', color: 'var(--t3)', lineHeight: 1.6 }}>
+                  This listing is claimed and managed by {listing.name}.
                 </div>
-                <a href="mailto:hello@hakd.app?subject=Claim Listing" style={{ display: 'block', marginTop: '0.65rem', fontSize: '0.72rem', color: 'var(--gold)', fontWeight: 600 }}>
-                  Claim this listing →
-                </a>
               </div>
             )}
           </div>
