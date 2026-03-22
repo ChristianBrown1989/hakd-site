@@ -244,28 +244,31 @@ export default async function HomePage() {
         <div className="directory-inner">
           <div className="directory-header">
             <div>
-              <div className="directory-badge">Coming Soon</div>
+              <div className="directory-badge">Live Now</div>
               <div className="directory-title">The Human Optimization Directory</div>
               <div className="directory-sub">
                 A curated, vetted resource hub. Every listing reviewed for evidence quality and real-world application.
               </div>
             </div>
+            <a href="/directory" className="btn-primary" style={{ alignSelf: 'flex-start', whiteSpace: 'nowrap' }}>
+              Browse Directory →
+            </a>
           </div>
           <div className="directory-grid">
             {[
-              { icon: '👤', title: 'Coaches & Practitioners', desc: 'Vetted performance coaches, sports medicine, and optimization specialists.' },
-              { icon: '🧊', title: 'Recovery Tools', desc: 'Cold therapy, compression, breathwork devices, and recovery technology.' },
-              { icon: '⌚', title: 'Wearables & Tracking', desc: 'HRV monitors, sleep trackers, glucose monitors, and performance wearables.' },
-              { icon: '🥩', title: 'Nutrition Protocols', desc: 'Evidence-based nutrition frameworks, fasting protocols, and supplementation guides.' },
-              { icon: '🧠', title: 'Mental Performance', desc: 'Cognitive enhancement, stress resilience, and psychological optimization.' },
-              { icon: '🔬', title: 'Longevity Research', desc: 'Biomarker testing, healthspan protocols, and cutting-edge longevity science.' },
+              { icon: '⚡', title: 'Nervous System', desc: 'HRV training, sympathetic regulation, and parasympathetic restoration.', key: 'nervous-system' },
+              { icon: '🔄', title: 'Recovery', desc: 'Cold therapy, sleep architecture, breathwork, and the biology of restoration.', key: 'recovery' },
+              { icon: '🏋️', title: 'Training Science', desc: 'Evidence-based coaches and tools for RPE programming and athletic performance.', key: 'training-science' },
+              { icon: '🥩', title: 'Nutrition', desc: 'Macro-optimization, supplement protocols, and performance fueling.', key: 'nutrition' },
+              { icon: '🧠', title: 'Mental Performance', desc: 'Cognitive enhancement, stress resilience, and psychological optimization.', key: 'mental-performance' },
+              { icon: '🔬', title: 'Longevity', desc: 'Biomarker testing, VO2 max training, and the metrics that predict healthspan.', key: 'longevity' },
             ].map((cat) => (
-              <div className="dir-card" key={cat.title}>
+              <a href={`/directory/category/${cat.key}`} className="dir-card" key={cat.title} style={{ textDecoration: 'none' }}>
                 <div className="dir-card-icon">{cat.icon}</div>
                 <div className="dir-card-title">{cat.title}</div>
                 <div className="dir-card-desc">{cat.desc}</div>
-                <div className="dir-card-count">Coming soon</div>
-              </div>
+                <div className="dir-card-count">Browse →</div>
+              </a>
             ))}
           </div>
         </div>
