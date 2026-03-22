@@ -47,22 +47,37 @@ export default async function sitemap() {
     changeFrequency: 'weekly',
   }));
 
-  const cityRoutes = [
+  const CITY_SLUGS = [
     'austin', 'new-york', 'los-angeles', 'miami', 'denver',
     'san-francisco', 'chicago', 'seattle', 'boston', 'dallas',
     'phoenix', 'nashville', 'san-diego', 'atlanta', 'portland',
     'minneapolis', 'charlotte', 'washington-dc',
-  ].map(slug => ({
+  ];
+  const CAT_SLUGS = [
+    'nervous-system', 'recovery', 'training-science',
+    'nutrition', 'wearables-hrv', 'mental-performance', 'longevity',
+  ];
+
+  const cityRoutes = CITY_SLUGS.map(slug => ({
     url: `${BASE_URL}/directory/city/${slug}`,
     priority: 0.75,
     changeFrequency: 'weekly',
   }));
+
+  const cityCategoryRoutes = CITY_SLUGS.flatMap(city =>
+    CAT_SLUGS.map(cat => ({
+      url: `${BASE_URL}/directory/city/${city}/${cat}`,
+      priority: 0.7,
+      changeFrequency: 'weekly',
+    }))
+  );
 
   return [
     ...STATIC_ROUTES.map(r => ({ url: r.url, priority: r.priority, changeFrequency: r.changefreq })),
     ...CATEGORY_ROUTES.map(r => ({ url: r.url, priority: r.priority, changeFrequency: r.changefreq })),
     ...directoryCategoryRoutes,
     ...cityRoutes,
+    ...cityCategoryRoutes,
     ...articleRoutes,
     ...listingRoutes,
   ];

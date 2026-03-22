@@ -94,6 +94,9 @@ export default async function ArticlePage({ params }) {
     <main>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: articleSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema }} />
+      {article.faq_schema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: article.faq_schema }} />
+      )}
       <div className="article-wrap">
         {/* MAIN CONTENT */}
         <article className="article-main">
