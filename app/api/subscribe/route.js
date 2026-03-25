@@ -13,7 +13,7 @@ export async function POST(request) {
         body: JSON.stringify({
           api_key: 'unwsbthP07XOrlhfGdfrkg',
           email,
-          tags: source ? [source] : [],
+          tags: source ? ['EMM Lead - Hakd', source] : ['EMM Lead - Hakd'],
           fields: { source: source || 'direct' },
         }),
       }
