@@ -60,6 +60,17 @@ export default async function ArticlePage({ params }) {
   const related = await getRelated(params.slug);
 
   // Article JSON-LD — what AI search engines use to cite and summarize this content
+  const CATEGORY_MAP = {
+    'nervous-system': 'Nervous System',
+    'recovery': 'Recovery',
+    'training-science': 'Training Science',
+    'nutrition': 'Nutrition',
+    'wearables-hrv': 'Wearables & HRV',
+    'mental-performance': 'Mental Performance',
+    'longevity': 'Longevity',
+  };
+  const categoryLabel = CATEGORY_MAP[article.category] || 'Performance Intelligence';
+
   const wordCount = article.content ? article.content.replace(/<[^>]+>/g, '').split(/\s+/).length : 800;
   const readMins = Math.max(4, Math.round(wordCount / 200));
 
@@ -78,7 +89,7 @@ export default async function ArticlePage({ params }) {
     timeRequired: `PT${readMins}M`,
     inLanguage: 'en-US',
     about: { '@type': 'Thing', name: 'Performance Optimization' },
-    keywords: 'biohacking, HRV, nervous system, recovery, performance, longevity',
+    keywords: [article.category, 'biohacking', 'HRV', 'nervous system', 'recovery', 'performance optimization', 'longevity'].filter(Boolean).join(', '),
   });
 
   const breadcrumbSchema = JSON.stringify({
@@ -104,7 +115,7 @@ export default async function ArticlePage({ params }) {
           <Link href="/" className="article-back">← Back to HAKD</Link>
 
           <header className="article-header">
-            <div className="article-header-cat">Performance Intelligence</div>
+            <div className="article-header-cat">{categoryLabel}</div>
             <div dangerouslySetInnerHTML={{ __html: `<h1>${article.title}</h1>` }} />
             <div className="article-header-meta">
               <span>📅 {formatDate(article.published_at)}</span>
@@ -237,14 +248,14 @@ export default async function ArticlePage({ params }) {
             <div className="sidebar-label">Topics</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
               {[
-                ['⚡', 'Nervous System', 'var(--cat-ns)'],
-                ['🔄', 'Recovery', 'var(--cat-recovery)'],
-                ['🏋️', 'Training Science', 'var(--cat-training)'],
-                ['🧠', 'Mental Performance', 'var(--cat-mental)'],
-                ['⌚', 'Wearables & HRV', 'var(--cat-wearables)'],
-                ['🔬', 'Longevity', 'var(--cat-longevity)'],
-              ].map(([icon, name, color]) => (
-                <a href="/articles" key={name} style={{
+                ['⚡', 'Nervous System', 'var(--cat-ns)', 'nervous-system'],
+                ['🔄', 'Recovery', 'var(--cat-recovery)', 'recovery'],
+                ['🏋️', 'Training Science', 'var(--cat-training)', 'training-science'],
+                ['🧠', 'Mental Performance', 'var(--cat-mental)', 'mental-performance'],
+                ['⌚', 'Wearables & HRV', 'var(--cat-wearables)', 'wearables-hrv'],
+                ['🔬', 'Longevity', 'var(--cat-longevity)', 'longevity'],
+              ].map(([icon, name, color, key]) => (
+                <a href={`/articles/category/${key}`} key={name} style={{
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.65rem',

@@ -12,9 +12,16 @@ export const metadata = {
     type: 'website',
     url: 'https://hakd.app',
     siteName: 'HAKD',
+    locale: 'en_US',
+    images: [{ url: 'https://hakd.app/og-image.png', width: 1200, height: 630, alt: 'HAKD — Performance Intelligence for High Achievers' }],
   },
-  twitter: { card: 'summary_large_image', title: 'HAKD — Performance Intelligence', description: 'Evidence-based performance optimization for high achievers.' },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'HAKD — Performance Intelligence',
+    description: 'Evidence-based performance optimization for high achievers.',
+    images: ['https://hakd.app/og-image.png'],
+  },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
 };
 
 // JSON-LD: tells Google AND AI systems (Perplexity, ChatGPT, Claude) exactly what this site is
@@ -31,18 +38,32 @@ const schemaWebSite = JSON.stringify({
   },
 });
 
+const schemaOrganization = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'HAKD',
+  url: 'https://hakd.app',
+  logo: 'https://hakd.app/og-image.png',
+  description: 'Performance intelligence platform providing evidence-based protocols for HRV optimization, nervous system science, adaptive training, and longevity for high-achieving professionals.',
+  founder: { '@type': 'Person', name: 'Christian Brown' },
+  sameAs: ['https://hakd.app'],
+});
+
 const schemaPerson = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Christian Brown',
-  url: 'https://hakd.app',
+  url: 'https://hakd.app/about',
   jobTitle: 'Performance Coach',
   description: 'Performance coach specializing in nervous system optimization, HRV-based training, and adaptive programming for high-achieving professionals.',
+  worksFor: { '@type': 'Organization', name: 'HAKD', url: 'https://hakd.app' },
   knowsAbout: [
     'HRV Training', 'Nervous System Optimization', 'Recovery Protocols',
     'Biohacking', 'Longevity', 'Strength Training', 'Breathwork',
-    'Sleep Optimization', 'Mental Performance',
+    'Sleep Optimization', 'Mental Performance', 'RPE-Based Training',
+    'Cold Therapy', 'Biomarker Testing', 'VO2 Max Training',
   ],
+  sameAs: ['https://hakd.app', 'https://hakd.app/about'],
 });
 
 export default function RootLayout({ children }) {
@@ -51,6 +72,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="msvalidate.01" content="62B70970004A4C96E0BD783C6676C3CF" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaWebSite }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaOrganization }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaPerson }} />
         <link rel="alternate" type="application/rss+xml" title="HAKD Performance Intelligence" href="https://hakd.app/feed.xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

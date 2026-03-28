@@ -73,7 +73,7 @@ export default async function sitemap() {
   );
 
   return [
-    ...STATIC_ROUTES.map(r => ({ url: r.url, priority: r.priority, changeFrequency: r.changefreq })),
+    ...STATIC_ROUTES.map(r => ({ url: r.url, priority: r.priority, changeFrequency: r.changefreq, lastModified: new Date().toISOString() })),
     ...CATEGORY_ROUTES.map(r => ({ url: r.url, priority: r.priority, changeFrequency: r.changefreq })),
     ...directoryCategoryRoutes,
     ...cityRoutes,
