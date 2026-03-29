@@ -13,13 +13,13 @@ export const metadata = {
     url: 'https://hakd.app',
     siteName: 'HAKD',
     locale: 'en_US',
-    images: [{ url: 'https://hakd.app/og-image.png', width: 1200, height: 630, alt: 'HAKD — Performance Intelligence for High Achievers' }],
+    images: [{ url: 'https://hakd.app/og-image.svg', width: 1200, height: 630, alt: 'HAKD — Performance Intelligence for High Achievers' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'HAKD — Performance Intelligence',
     description: 'Evidence-based performance optimization for high achievers.',
-    images: ['https://hakd.app/og-image.png'],
+    images: ['https://hakd.app/og-image.svg'],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 } },
 };
@@ -43,9 +43,59 @@ const schemaOrganization = JSON.stringify({
   '@type': 'Organization',
   name: 'HAKD',
   url: 'https://hakd.app',
-  logo: 'https://hakd.app/og-image.png',
+  logo: 'https://hakd.app/og-image.svg',
   description: 'Performance intelligence platform providing evidence-based protocols for HRV optimization, nervous system science, adaptive training, and longevity for high-achieving professionals.',
   founder: { '@type': 'Person', name: 'Christian Brown' },
+  sameAs: ['https://hakd.app'],
+});
+
+const schemaProfessionalService = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'HAKD — Performance Coaching',
+  url: 'https://hakd.app',
+  logo: 'https://hakd.app/og-image.svg',
+  description: 'Evidence-based performance coaching for high-achieving professionals. Specializing in HRV optimization, nervous system training, adaptive programming, and recovery architecture.',
+  founder: { '@type': 'Person', name: 'Christian Brown', url: 'https://hakd.app/about' },
+  priceRange: '$$',
+  serviceType: [
+    'HRV Coaching',
+    'Nervous System Optimization',
+    'Performance Coaching',
+    'Recovery Programming',
+    'Adaptive Training',
+  ],
+  areaServed: { '@type': 'Country', name: 'United States' },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'EMM Coaching Programs',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'EMM Monthly Coaching',
+          description: 'Full custom coaching with HRV, recovery, and adaptive training programming.',
+          url: 'https://coach.everfit.io/package/GL583637',
+        },
+        price: '250',
+        priceCurrency: 'USD',
+        priceSpecification: { '@type': 'UnitPriceSpecification', price: '250', priceCurrency: 'USD', unitCode: 'MON' },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'EMM Monthly Training',
+          description: 'Self-guided adaptive training program built around your EMM score.',
+          url: 'https://coach.everfit.io/package/KX912574',
+        },
+        price: '80',
+        priceCurrency: 'USD',
+        priceSpecification: { '@type': 'UnitPriceSpecification', price: '80', priceCurrency: 'USD', unitCode: 'MON' },
+      },
+    ],
+  },
   sameAs: ['https://hakd.app'],
 });
 
@@ -73,6 +123,7 @@ export default function RootLayout({ children }) {
         <meta name="msvalidate.01" content="62B70970004A4C96E0BD783C6676C3CF" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaWebSite }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaOrganization }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaProfessionalService }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schemaPerson }} />
         <link rel="alternate" type="application/rss+xml" title="HAKD Performance Intelligence" href="https://hakd.app/feed.xml" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

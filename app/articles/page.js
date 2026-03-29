@@ -35,7 +35,7 @@ function formatDate(iso) {
 export default async function ArticlesPage() {
   const { data: articles } = await supabase
     .from('articles')
-    .select('title, slug, meta_description, published_at')
+    .select('title, slug, meta_description, published_at, category')
     .order('published_at', { ascending: false })
     .limit(50);
 
@@ -114,7 +114,9 @@ export default async function ArticlesPage() {
               <Link href={`/articles/${a.slug}`} key={a.slug}>
                 <div className="article-card">
                   <div className="article-card-top">
-                    <span className="article-cat">Performance Intelligence</span>
+                    <span className="article-cat">
+                      {CATEGORIES.find((c) => c.key === a.category)?.name || 'Performance Intelligence'}
+                    </span>
                     <span className="article-read-time">6 min</span>
                   </div>
                   <div className="article-title">{a.title}</div>

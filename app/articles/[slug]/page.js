@@ -88,17 +88,22 @@ export default async function ArticlePage({ params }) {
     wordCount,
     timeRequired: `PT${readMins}M`,
     inLanguage: 'en-US',
-    about: { '@type': 'Thing', name: 'Performance Optimization' },
-    keywords: [article.category, 'biohacking', 'HRV', 'nervous system', 'recovery', 'performance optimization', 'longevity'].filter(Boolean).join(', '),
+    about: { '@type': 'Thing', name: categoryLabel },
+    // Keywords use the human-readable category label from the DB, plus core target keywords
+    keywords: [categoryLabel, 'HRV coaching', 'nervous system optimization', 'performance coaching', 'biohacking', 'recovery', 'performance optimization', 'longevity'].filter(Boolean).join(', '),
   });
 
+  // Breadcrumb includes the article's actual category as an intermediate level
   const breadcrumbSchema = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://hakd.app' },
       { '@type': 'ListItem', position: 2, name: 'Articles', item: 'https://hakd.app/articles' },
-      { '@type': 'ListItem', position: 3, name: article.title, item: `https://hakd.app/articles/${article.slug}` },
+      ...(article.category
+        ? [{ '@type': 'ListItem', position: 3, name: categoryLabel, item: `https://hakd.app/articles/category/${article.category}` }]
+        : []),
+      { '@type': 'ListItem', position: article.category ? 4 : 3, name: article.title, item: `https://hakd.app/articles/${article.slug}` },
     ],
   });
 
